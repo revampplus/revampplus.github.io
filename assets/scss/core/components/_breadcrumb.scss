@@ -1,0 +1,13 @@
+.breadcrumb-light {
+	.breadcrumb-item {
+		&.active {
+			color: rgba(var(--#{$prefix}white-rgb), .8);
+		}
+		a {
+			color: $white;
+		}
+		&:before {
+			color: rgba(var(--#{$prefix}white-rgb), .6);
+		}
+	}
+}

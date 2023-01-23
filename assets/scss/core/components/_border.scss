@@ -1,0 +1,86 @@
+.border-style {
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        width: 80%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: 1px;
+        background: radial-gradient(ellipse at center, var(--#{$prefix}gray-300) 0, rgba(var(--#{$prefix}white-rgb), 0) 75%);
+    }
+
+    &.bottom {
+        &:after {
+            bottom: 0;
+        }
+    }
+
+    &.top {
+        &:after {
+            top: 0;
+        }
+    }
+
+    &.light {
+        &:after {
+            background: radial-gradient(ellipse at center, rgba(var(--#{$prefix}white-rgb), 0.2) 0, rgba(var(--#{$prefix}gray-900-rgb), 0) 75%);
+        }
+    }
+}
+
+.separated {
+    overflow: hidden;
+
+    >* {
+        box-shadow: -1px -1px 0px 0px var(--#{$prefix}gray-300);
+    }
+}
+
+.divider {
+    height: 1px;
+    background: var(--#{$prefix}black);
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.divider-light {
+    height: 1px;
+    background: var(--#{$prefix}white);
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
+.col{
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $next: breakpoint-next($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($next, $grid-breakpoints);
+
+        // stylelint-disable-next-line scss/selector-no-union-class-name
+        &#{$infix} {
+            &-divider {
+                @include media-breakpoint-up($next) {
+                    > :not(:first-child) {
+                        position: relative;
+                        &:before {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: .0625rem;
+                            height: 100%;
+                            background-color: rgba(var(--#{$prefix}black-rgb), 0.1);
+                            content: '';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
